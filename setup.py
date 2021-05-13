@@ -6,20 +6,23 @@ with open("README.md") as fp:
 
 
 setuptools.setup(
-    name="cdk_devops",
+    name="SchoolOps Learning",
     version="0.0.1",
 
-    description="An empty CDK Python app",
+    description="A CDK app for learning",
     long_description=long_description,
     long_description_content_type="text/markdown",
 
     author="author",
 
-    package_dir={"": "cdk_devops"},
-    packages=setuptools.find_packages(where="cdk_devops"),
+    package_dir={"": "stacks"},
+    packages=setuptools.find_packages(where="stacks"),
 
     install_requires=[
         "aws-cdk.core==1.103.0",
+        "aws-cdk.aws-ec2==1.103.0",
+        "aws-cdk.aws-iam==1.103.0",
+        "aws-cdk.aws-ssm==1.103.0",
     ],
 
     python_requires=">=3.6",
