@@ -14,9 +14,6 @@ class VPCStack(cdk.Stack):
         # prj_name = self.node.try_get_context('project_name')
         env_name = self.node.try_get_context('env')
 
-        if not env_name:
-            env_name = 'dev'
-
         self.vpc = ec2.Vpc(
             self,
             'devVPC',

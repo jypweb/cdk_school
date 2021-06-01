@@ -7,7 +7,7 @@ with open("README.md") as fp:
 
 setuptools.setup(
     name="SchoolOps Learning",
-    version="0.0.1",
+    version="0.0.2",
 
     description="A CDK app for learning",
     long_description=long_description,
@@ -19,10 +19,13 @@ setuptools.setup(
     packages=setuptools.find_packages(where="stacks"),
 
     install_requires=[
-        "aws-cdk.core==1.103.0",
-        "aws-cdk.aws-ec2==1.103.0",
-        "aws-cdk.aws-iam==1.103.0",
-        "aws-cdk.aws-ssm==1.103.0",
+        "aws-cdk.core==1.106.1",
+        "aws-cdk.aws-ec2==1.106.1",
+        "aws-cdk.aws-iam==1.106.1",
+        "aws-cdk.aws-kms==1.106.1",
+        "aws-cdk.aws-rds==1.106.1",
+        "aws-cdk.aws-secretsmanager==1.106.1",
+        "aws-cdk.aws-ssm==1.106.1",
     ],
 
     python_requires=">=3.6",

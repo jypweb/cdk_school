@@ -18,10 +18,7 @@ class SecurityStack(cdk.Stack):
         # prj_name = self.node.try_get_context('project_name')
         env_name = self.node.try_get_context('env')
 
-        if not env_name:
-            env_name = 'dev'
-
-        lambda_sg = ec2.SecurityGroup(
+        self.lambda_sg = ec2.SecurityGroup(
             self,
             'LambdaSecurityGroup',
             security_group_name='lambda-sg',
@@ -66,7 +63,7 @@ class SecurityStack(cdk.Stack):
             self,
             'LambdaSgParam',
             parameter_name=f'/{env_name}/lambda-sg',
-            string_value=lambda_sg.security_group_id
+            string_value=self.lambda_sg.security_group_id
         )
 
         ssm.StringParameter(
