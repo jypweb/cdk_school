@@ -4,7 +4,6 @@ from aws_cdk import (
     core as cdk,
     aws_rds as rds,
     aws_ec2 as ec2,
-    aws_kms as kms,
     aws_ssm as ssm,
     aws_secretsmanager as sm,
 )
@@ -57,18 +56,25 @@ class RDSStack(cdk.Stack):
                     instance_type_identifier="t3.small")
             ),
             instances=1,
-            parameter_group=rds.CfnDBClusterParameterGroup.from_parameter_group_name(
+            parameter_group=rds.ParameterGroup.from_parameter_group_name(  # noqa
                 self,
                 'PgDev',
                 parameter_group_name='default.aurora-mysql5.7'
             ),
-            removal_policy=cdk.RemovalPolicy.DESTROY,
             credentials=rds.Credentials.from_secret(secret=db_creds),
             storage_encrypted=True,
-            storage_encryption_key=kmskey
+            storage_encryption_key=kmskey,
+            removal_policy=cdk.RemovalPolicy.DESTROY
         )
 
         db_mysql.connections.allow_default_port_from(
             lambdasg, "Access from Lambda Functions")
         db_mysql.connections.allow_default_port_from(
             bastionsg, "Access from Bastion Host")
+
+        ssm.StringParameter(
+            self,
+            'DbHost',
+            parameter_name=f'/{env_name}/db-host',
+            string_value=db_mysql.cluster_endpoint.hostname
+        )

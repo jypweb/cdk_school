@@ -9,6 +9,7 @@ from stacks.bastion_stack import BastionStack
 from stacks.kms_stack import KmsStack
 from stacks.s3_stack import S3Stack
 from stacks.rds_stack import RDSStack
+from stacks.redis_stack import RedisStack
 
 app = cdk.App()
 vpc_stack = VPCStack(app, "vpc")
@@ -23,5 +24,10 @@ rds_stack = RDSStack(app, 'rds',
                      bastionsg=security_stack.bastion_sg,
                      kmskey=kms_stack.kms_rds,
                      )
+redis_stack = RedisStack(app,
+                         'redis',
+                         vpc=vpc_stack.vpc,
+                         redissg=security_stack.redis_sg
+                         )
 
 app.synth()

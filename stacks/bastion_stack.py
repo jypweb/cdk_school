@@ -14,7 +14,7 @@ class BastionStack(cdk.Stack):
                  **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        bastion_host = ec2.Instance(
+        self.bastion_host = ec2.Instance(
             self,
             'BastionHost',
             instance_type=ec2.InstanceType('t2.micro'),

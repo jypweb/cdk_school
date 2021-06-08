@@ -55,4 +55,3 @@ class VPCStack(cdk.Stack):
                 parameter_name=f'/{env_name}/private-subnet-{count}'
             )
             count += 1
-

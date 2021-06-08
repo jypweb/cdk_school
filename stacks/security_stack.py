@@ -23,7 +23,7 @@ class SecurityStack(cdk.Stack):
             'LambdaSecurityGroup',
             security_group_name='lambda-sg',
             vpc=vpc,
-            description='Security groups for lambdas',
+            description='Security group for lambdas',
             allow_all_outbound=True
         )
 
@@ -32,7 +32,7 @@ class SecurityStack(cdk.Stack):
             'BastionSecurityGroup',
             security_group_name='bastion-sg',
             vpc=vpc,
-            description='Security groups for the Bastion Host',
+            description='Security group for the Bastion Host',
             allow_all_outbound=True
         )
         self.bastion_sg.add_ingress_rule(
@@ -40,6 +40,16 @@ class SecurityStack(cdk.Stack):
             ec2.Port.tcp(22),
             'SSH Access'
         )
+
+        self.redis_sg = ec2.SecurityGroup(
+            self,
+            'RedisSecurityGroup',
+            security_group_name='redis-sg',
+            vpc=vpc,
+            description='Security group for Redis Cluster',
+            allow_all_outbound=True
+        )
+        self.redis_sg.add_ingress_rule(self.lambda_sg, ec2.Port.tcp(6379), 'Access from Lambda functions')
 
         lambda_role = iam.Role(
             self,
