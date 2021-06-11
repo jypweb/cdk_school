@@ -40,3 +40,18 @@ class RedisStack(cdk.Stack):
             auto_minor_version_upgrade=True
         )
         redis_cluster.add_depends_on(subnet_group)
+
+        # SSM Parameters
+        ssm.StringParameter(
+            self,
+            'RedisEndpoint',
+            parameter_name=f'/{env_name}/redis-endpoint',
+            string_value=redis_cluster.attr_redis_endpoint_address
+        )
+
+        ssm.StringParameter(
+            self,
+            'RedisPort',
+            parameter_name=f'/{env_name}/redis-port',
+            string_value=redis_cluster.attr_redis_endpoint_port
+        )
