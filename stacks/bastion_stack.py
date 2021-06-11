@@ -25,7 +25,7 @@ class BastionStack(cdk.Stack):
                 storage=ec2.AmazonLinuxStorage.GENERAL_PURPOSE
             ),
             vpc=vpc,
-            key_name='school_ops',
+            key_name='school-dev',
             vpc_subnets=ec2.SubnetSelection(
                 subnet_type=ec2.SubnetType.PUBLIC
             ),
