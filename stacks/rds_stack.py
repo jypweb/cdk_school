@@ -24,27 +24,15 @@ class RDSStack(cdk.Stack):
         prj_name = self.node.try_get_context("project_name")
         env_name = self.node.try_get_context("env")
 
-        json_template = {
-            'username': 'admin'
-        }
+        default_database_name = \
+            f'{prj_name.capitalize()}{env_name.capitalize()}'
 
-        db_creds = sm.Secret(
-            self,
-            'DbSecret',
-            secret_name=f'{env_name}-rds-secret',
-            generate_secret_string=sm.SecretStringGenerator(
-                include_space=False,
-                password_length=12,
-                generate_string_key='rds-password',
-                exclude_punctuation=True,
-                secret_string_template=json.dumps(json_template)
-            )
-        )
+        print(f"DEFAULT DB NAME {default_database_name}")
 
         db_mysql = rds.DatabaseCluster(
             self,
             'MySql',
-            default_database_name=f'{prj_name}-{env_name}',
+            default_database_name=default_database_name,
             engine=rds.DatabaseClusterEngine.aurora_mysql(
                 version=rds.AuroraMysqlEngineVersion.VER_5_7_12
             ),
@@ -61,7 +49,9 @@ class RDSStack(cdk.Stack):
                 'PgDev',
                 parameter_group_name='default.aurora-mysql5.7'
             ),
-            credentials=rds.Credentials.from_secret(secret=db_creds),
+            credentials=rds.Credentials.from_generated_secret(
+                username='admin'
+            ),
             storage_encrypted=True,
             storage_encryption_key=kmskey,
             removal_policy=cdk.RemovalPolicy.DESTROY
