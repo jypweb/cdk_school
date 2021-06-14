@@ -24,8 +24,6 @@ class RDSStack(cdk.Stack):
         default_database_name = \
             f'{prj_name.capitalize()}{env_name.capitalize()}'
 
-        print(f"DEFAULT DB NAME {default_database_name}")
-
         db_mysql = rds.DatabaseCluster(
             self,
             'MySql',
