@@ -26,6 +26,7 @@ setuptools.setup(
         "aws-cdk.aws-elasticache==1.108.1",
         "aws-cdk.aws-iam==1.108.1",
         "aws-cdk.aws-kms==1.108.1",
+        "aws-cdk.aws-lambda==1.108.1",
         "aws-cdk.aws-rds==1.108.1",
         "aws-cdk.aws-secretsmanager==1.108.1",
         "aws-cdk.aws-ssm==1.108.1",

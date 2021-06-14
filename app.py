@@ -12,6 +12,7 @@ from stacks.rds_stack import RDSStack
 from stacks.redis_stack import RedisStack
 from stacks.cognito_stack import CognitoStack
 from stacks.apigateway_stack import ApiGatewayStack
+from stacks.lambda_stack import LambdaStack
 
 app = cdk.App()
 vpc_stack = VPCStack(app, "vpc")
@@ -33,5 +34,6 @@ redis_stack = RedisStack(app,
                          )
 cognito_stack = CognitoStack(app, 'cognito')
 api_gateway_stack = ApiGatewayStack(app, 'api-gateway')
+lambda_stack = LambdaStack(app, 'lambda')
 
 app.synth()
