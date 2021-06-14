@@ -20,6 +20,7 @@ setuptools.setup(
 
     install_requires=[
         "aws-cdk.core==1.108.1",
+        "aws-cdk.aws-apigateway==1.108.1",
         "aws-cdk.aws-cognito==1.108.1",
         "aws-cdk.aws-ec2==1.108.1",
         "aws-cdk.aws-elasticache==1.108.1",
