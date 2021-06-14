@@ -10,6 +10,7 @@ from stacks.kms_stack import KmsStack
 from stacks.s3_stack import S3Stack
 from stacks.rds_stack import RDSStack
 from stacks.redis_stack import RedisStack
+from stacks.cognito_stack import CognitoStack
 
 app = cdk.App()
 vpc_stack = VPCStack(app, "vpc")
@@ -29,5 +30,6 @@ redis_stack = RedisStack(app,
                          vpc=vpc_stack.vpc,
                          redissg=security_stack.redis_sg
                          )
+cognito_stack = CognitoStack(app, 'cognito')
 
 app.synth()

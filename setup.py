@@ -19,14 +19,15 @@ setuptools.setup(
     # packages=setuptools.find_packages(where="stacks"),
 
     install_requires=[
-        "aws-cdk.core==1.106.1",
-        "aws-cdk.aws-ec2==1.106.1",
-        "aws-cdk.aws-elasticache==1.106.1",
-        "aws-cdk.aws-iam==1.106.1",
-        "aws-cdk.aws-kms==1.106.1",
-        "aws-cdk.aws-rds==1.106.1",
-        "aws-cdk.aws-secretsmanager==1.106.1",
-        "aws-cdk.aws-ssm==1.106.1",
+        "aws-cdk.core==1.108.1",
+        "aws-cdk.aws-cognito==1.108.1",
+        "aws-cdk.aws-ec2==1.108.1",
+        "aws-cdk.aws-elasticache==1.108.1",
+        "aws-cdk.aws-iam==1.108.1",
+        "aws-cdk.aws-kms==1.108.1",
+        "aws-cdk.aws-rds==1.108.1",
+        "aws-cdk.aws-secretsmanager==1.108.1",
+        "aws-cdk.aws-ssm==1.108.1",
     ],
 
     python_requires=">=3.6",
